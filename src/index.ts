@@ -1,4 +1,4 @@
-import loadGtm from './utils/loadGtm';
+import loadGtm from './lib/loadGtm';
 
 loadGtm(
   window,
