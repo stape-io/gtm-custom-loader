@@ -6,6 +6,7 @@ loadGtm(
   'script',
   'dataLayer',
   'GTM-KZ6S45Z',
-  'https://ss.wp-demo.stape.io/swhxltns.js',
+  'https://ss.wp-demo.stape.io',
+  'swhxltns',
   { cookie: 'api-key' }
 );

@@ -21,7 +21,8 @@ test('should not call getUid', () => {
     'script',
     'dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io'
+    'https://gtm.stape.io',
+    'swhxltns'
   );
   expect(getUid).not.toHaveBeenCalled();
 });
@@ -35,6 +36,7 @@ test('should call getUid if cookieKeeper option passed', () => {
     'dataLayer',
     'GTM-ID',
     'https://gtm.stape.io',
+    'swhxltns',
     cookieKeeper
   );
   expect(getUid).toHaveBeenCalledWith(cookieKeeper);
@@ -49,6 +51,7 @@ test('insert script with uid', () => {
     'dataLayer',
     'GTM-ID',
     'https://gtm.stape.io',
+    'swhxltns',
     cookieKeeper
   );
   expect(document.head.innerHTML).toEqual(
@@ -65,6 +68,7 @@ test('insert script with uid and custom data layer name', () => {
     'customDataLayer',
     'GTM-ID',
     'https://gtm.stape.io',
+    'swhxltns',
     cookieKeeper
   );
   expect(document.head.innerHTML).toEqual(
@@ -81,7 +85,8 @@ test('insert track first event in to dataLayer', () => {
     'script',
     '__dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io'
+    'https://gtm.stape.io',
+    'swhxltns'
   );
   expect((window as any).__dataLayer).toEqual([
     { 'gtm.start': 1000, event: 'gtm.js' },
@@ -99,7 +104,8 @@ test('should works if parent node doesnt exists', () => {
     'script',
     'dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io'
+    'https://gtm.stape.io',
+    'swhxltns'
   );
   expect(document.head.innerHTML).toEqual(
     '<script src="https://some-script.js"></script>'
@@ -118,6 +124,7 @@ test('should handle error', () => {
     'dataLayer',
     'GTM-ID',
     'https://gtm.stape.io',
+    'swhxltns',
     cookieKeeper
   );
   expect(console.error).toHaveBeenCalledWith(new Error('localStorage error'));
