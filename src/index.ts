@@ -5,8 +5,10 @@ loadGtm(
   document,
   'script',
   'dataLayer',
-  'GTM-KZ6S45Z',
-  'https://ss.wp-demo.stape.io',
-  'swhxltns',
-  { cookie: 'api-key' }
+  '{{WEB_GTM_ID}}',
+  '{{DOMAIN}}',
+  '{{CONTAINER_ID}}',
+  '{{USER_IDENTIFIER_TYPE}}' as any,
+  '{{USER_IDENTIFIER_VALUE}}',
+  '{{HTML_ATTRIBUTE}}'
 );

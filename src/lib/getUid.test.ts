@@ -3,7 +3,6 @@ import getUidFromCookie from './getUidFromCookie';
 import getUidFromLocalStorage from './getUidFromLocalStorage';
 import getUidFromVariable from './getUidFromVariable';
 import getUidFromHtml from './getUidFromHtml';
-import { CookieKeeperOptions } from '../models/CookieKeeperOptions';
 
 jest.mock('./getUidFromCookie', () => ({
   __esModule: true,
@@ -26,32 +25,26 @@ const consoleWarnMock = jest.spyOn(console, 'warn');
 
 test('should log warning and return undefined', () => {
   consoleWarnMock.mockReturnValueOnce();
-  expect(getUid({})).toEqual(undefined);
-  expect(console.warn).toHaveBeenCalledWith('invalid uid source', {});
+  expect(getUid('sdcdscds' as any)).toEqual(undefined);
+  expect(console.warn).toHaveBeenCalledWith('invalid uid source', 'sdcdscds');
 });
 
 test('should call getUidFromCookie', () => {
-  const options: CookieKeeperOptions = { cookie: 'test' };
-  expect(getUid(options)).toEqual('cookie');
-  expect(getUidFromCookie).toHaveBeenCalledWith(options.cookie);
+  expect(getUid('cookie', 'test')).toEqual('cookie');
+  expect(getUidFromCookie).toHaveBeenCalledWith('test');
 });
 
 test('should call getUidFromLocalStorage', () => {
-  const options: CookieKeeperOptions = { localStorage: 'test' };
-  expect(getUid(options)).toEqual('localStorage');
-  expect(getUidFromLocalStorage).toHaveBeenCalledWith(options.localStorage);
+  expect(getUid('localStorage', 'test')).toEqual('localStorage');
+  expect(getUidFromLocalStorage).toHaveBeenCalledWith('test');
 });
 
 test('should call getUidFromVariable', () => {
-  const options: CookieKeeperOptions = { variable: 'test' };
-  expect(getUid(options)).toEqual('variable');
-  expect(getUidFromVariable).toHaveBeenCalledWith(options.variable);
+  expect(getUid('jsVariable', 'test')).toEqual('variable');
+  expect(getUidFromVariable).toHaveBeenCalledWith('test');
 });
 
 test('should call getUidFromHtml', () => {
-  const options: CookieKeeperOptions = {
-    html: { selector: '#test > li', attribute: 'data-uid' },
-  };
-  expect(getUid(options)).toEqual('html');
-  expect(getUidFromHtml).toHaveBeenCalledWith(options.html);
+  expect(getUid('cssSelector', '#test > li', 'data-uid')).toEqual('html');
+  expect(getUidFromHtml).toHaveBeenCalledWith('#test > li', 'data-uid');
 });

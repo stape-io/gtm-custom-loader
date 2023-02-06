@@ -1,9 +1,7 @@
-import { HtmlOptions } from '../models/CookieKeeperOptions';
-
-export default function getUidFromHtml({
-  selector,
-  attribute,
-}: HtmlOptions): string | undefined | null {
-  const element = document.querySelector(selector);
-  return element?.getAttribute(attribute);
+export default function getUidFromHtml(
+  cssSelector: string,
+  attribute?: string
+): string | undefined | null {
+  const element = document.querySelector(cssSelector);
+  return attribute ? element?.getAttribute(attribute) : element?.textContent;
 }

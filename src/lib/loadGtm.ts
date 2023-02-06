@@ -1,5 +1,5 @@
 import getUid from './getUid';
-import { CookieKeeperOptions } from '../models/CookieKeeperOptions';
+import { UserIdentifierType } from '../models/CookieKeeperOptions';
 import getIsCookieKeeperEnabled from './getIsCookieKeeperEnabled';
 
 export default function loadGtm(
@@ -10,13 +10,15 @@ export default function loadGtm(
   id: string,
   domain: string,
   containerId: string,
-  cookieKeeper?: CookieKeeperOptions
+  userIdentifierType?: UserIdentifierType,
+  userIdentifierValue?: string,
+  htmlAttribute?: string
 ): void {
   let uid: string | undefined | null;
   try {
     uid =
-      cookieKeeper && getIsCookieKeeperEnabled()
-        ? getUid(cookieKeeper)
+      userIdentifierType && getIsCookieKeeperEnabled()
+        ? getUid(userIdentifierType, userIdentifierValue, htmlAttribute)
         : undefined;
   } catch (e) {
     console.error(e);
@@ -25,11 +27,12 @@ export default function loadGtm(
   w[gtmVariable] = w[gtmVariable] || [];
   w[gtmVariable].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
   const firstScript = document.getElementsByTagName(tagName)[0];
-  const dataLayerParam = gtmVariable === 'dataLayer' ? '' : `&l=${gtmVariable}`;
-  const uidParam = uid ? `&uid=${uid}` : '';
-  const scriptName = uid ? `ck${containerId}` : containerId;
+  const dataLayerParam = gtmVariable === 'dataLayer' ? '' : '&l=' + gtmVariable;
+  const uidParam = uid ? '&uid=' + uid : '';
+  const scriptName = uid ? 'ck' + containerId : containerId;
   const script = document.createElement(tagName) as HTMLScriptElement;
   script.async = true;
-  script.src = `${domain}/${scriptName}.js?id=${id}${dataLayerParam}${uidParam}`;
+  script.src =
+    domain + '/' + scriptName + '.js?id=' + id + dataLayerParam + uidParam;
   firstScript.parentNode?.insertBefore(script, firstScript);
 }
