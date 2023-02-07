@@ -3,7 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.ts',
+  entry: {
+    gtm: './src/gtm.ts',
+    syncCookie: './src/syncCookie.ts',
+  },
   module: {
     rules: [
       {
@@ -19,6 +22,7 @@ module.exports = {
   output: {
     clean: true,
     chunkFormat: 'commonjs',
+    filename: '[name].js',
     environment: {
       arrowFunction: false,
       bigIntLiteral: false,

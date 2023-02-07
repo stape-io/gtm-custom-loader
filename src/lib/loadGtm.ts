@@ -8,15 +8,15 @@ export default function loadGtm(
   tagName: string,
   gtmVariable: string,
   id: string,
-  domain: string,
-  containerId: string,
+  src: string,
+  ckSrc: string,
   userIdentifierType?: UserIdentifierType,
   userIdentifierValue?: string,
   htmlAttribute?: string
 ): void {
-  let uid: string | undefined | null;
+  let identifier: string | undefined | null;
   try {
-    uid =
+    identifier =
       userIdentifierType && getIsCookieKeeperEnabled()
         ? getUid(userIdentifierType, userIdentifierValue, htmlAttribute)
         : undefined;
@@ -28,11 +28,10 @@ export default function loadGtm(
   w[gtmVariable].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
   const firstScript = document.getElementsByTagName(tagName)[0];
   const dataLayerParam = gtmVariable === 'dataLayer' ? '' : '&l=' + gtmVariable;
-  const uidParam = uid ? '&uid=' + uid : '';
-  const scriptName = uid ? 'ck' + containerId : containerId;
+  const uidParam = identifier ? '&bi=' + identifier : '';
   const script = document.createElement(tagName) as HTMLScriptElement;
+  src = identifier ? ckSrc : src;
   script.async = true;
-  script.src =
-    domain + '/' + scriptName + '.js?id=' + id + dataLayerParam + uidParam;
+  script.src = src + '?id=' + id + dataLayerParam + uidParam;
   firstScript.parentNode?.insertBefore(script, firstScript);
 }

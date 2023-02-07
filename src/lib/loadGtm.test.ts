@@ -64,8 +64,8 @@ test('insert script with uid', () => {
     'script',
     'dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io',
-    'swhxltns',
+    'https://gtm.stape.io/swhxltns.js',
+    'https://gtm.stape.io/ckswhxltns.js',
     'cookie',
     'test'
   );
@@ -81,8 +81,8 @@ test('insert script with uid and custom data layer name', () => {
     'script',
     'customDataLayer',
     'GTM-ID',
-    'https://gtm.stape.io',
-    'swhxltns',
+    'https://gtm.stape.io/swhxltns.js',
+    'https://gtm.stape.io/ckswhxltns.js',
     'cookie',
     'test'
   );
