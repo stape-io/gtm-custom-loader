@@ -9,7 +9,7 @@ export default function loadGtm(
   gtmVariable: string,
   id: string,
   src: string,
-  ckSrc: string,
+  ckSrc?: string,
   userIdentifierType?: UserIdentifierType,
   userIdentifierValue?: string,
   htmlAttribute?: string
@@ -30,7 +30,7 @@ export default function loadGtm(
   const dataLayerParam = gtmVariable === 'dataLayer' ? '' : '&l=' + gtmVariable;
   const uidParam = identifier ? '&bi=' + identifier : '';
   const script = document.createElement(tagName) as HTMLScriptElement;
-  src = identifier ? ckSrc : src;
+  src = identifier && ckSrc ? ckSrc : src;
   script.async = true;
   script.src = src + '?id=' + id + dataLayerParam + uidParam;
   firstScript.parentNode?.insertBefore(script, firstScript);
