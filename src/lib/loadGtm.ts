@@ -8,8 +8,8 @@ export default function loadGtm(
   tagName: string,
   gtmVariable: string,
   id: string,
-  src: string,
-  ckSrc?: string,
+  domain: string,
+  containerId: string,
   userIdentifierType?: UserIdentifierType,
   userIdentifierValue?: string,
   htmlAttribute?: string
@@ -28,10 +28,10 @@ export default function loadGtm(
   w[gtmVariable].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
   const firstScript = document.getElementsByTagName(tagName)[0];
   const dataLayerParam = gtmVariable === 'dataLayer' ? '' : '&l=' + gtmVariable;
-  const uidParam = identifier ? '&bi=' + identifier : '';
+  const biParam = identifier ? '&bi=' + identifier : '';
   const script = document.createElement(tagName) as HTMLScriptElement;
-  src = identifier && ckSrc ? ckSrc : src;
+  const path = identifier ? 'ck' + containerId : containerId;
   script.async = true;
-  script.src = src + '?id=' + id + dataLayerParam + uidParam;
+  script.src = domain + '/' + path + '.js?id=' + id + dataLayerParam + biParam;
   firstScript.parentNode?.insertBefore(script, firstScript);
 }

@@ -6,8 +6,8 @@ loadGtm(
   'script',
   'dataLayer',
   '{{WEB_GTM_ID}}',
-  '{{SRC}}',
-  '{{CK_SRC}}',
+  '{{DOMAIN}}',
+  '{{CONTAINER_ID}}',
   '{{USER_IDENTIFIER_TYPE}}' as any,
   '{{USER_IDENTIFIER_VALUE}}',
   '{{HTML_ATTRIBUTE}}'

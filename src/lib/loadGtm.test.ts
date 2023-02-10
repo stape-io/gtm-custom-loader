@@ -64,8 +64,8 @@ test('insert script with uid', () => {
     'script',
     'dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io/swhxltns.js',
-    'https://gtm.stape.io/ckswhxltns.js',
+    'https://gtm.stape.io',
+    'swhxltns',
     'cookie',
     'test'
   );
@@ -81,8 +81,8 @@ test('insert script with uid and custom data layer name', () => {
     'script',
     'customDataLayer',
     'GTM-ID',
-    'https://gtm.stape.io/swhxltns.js',
-    'https://gtm.stape.io/ckswhxltns.js',
+    'https://gtm.stape.io',
+    'swhxltns',
     'cookie',
     'test'
   );
@@ -100,8 +100,8 @@ test('insert track first event in to dataLayer', () => {
     'script',
     '__dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io/swhxltns.js',
-    'https://gtm.stape.io/ckswhxltns.js'
+    'https://gtm.stape.io',
+    'swhxltns'
   );
   expect((window as any).__dataLayer).toEqual([
     { 'gtm.start': 1000, event: 'gtm.js' },
@@ -119,8 +119,8 @@ test('should works if parent node doesnt exists', () => {
     'script',
     'dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io/swhxltns.js',
-    'https://gtm.stape.io/ckswhxltns.js'
+    'https://gtm.stape.io',
+    'swhxltns'
   );
   expect(document.head.innerHTML).toEqual(
     '<script src="https://some-script.js"></script>'
@@ -135,8 +135,8 @@ test('should handle error', () => {
     'script',
     'dataLayer',
     'GTM-ID',
-    'https://gtm.stape.io/swhxltns.js',
-    'https://gtm.stape.io/ckswhxltns.js',
+    'https://gtm.stape.io',
+    'swhxltns',
     'localStorage',
     'error'
   );
@@ -151,7 +151,8 @@ test('should work as default loader', () => {
     'script',
     'dataLayer',
     'GTM-ID',
-    'https://googletagmanager.com/gtm.js'
+    'https://googletagmanager.com',
+    'gtm'
   );
   expect(document.head.innerHTML).toEqual(
     '<script src="https://googletagmanager.com/gtm.js?id=GTM-ID"></script><script src="https://some-script.js"></script>'
