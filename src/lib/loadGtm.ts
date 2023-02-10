@@ -28,7 +28,7 @@ export default function loadGtm(
   w[gtmVariable].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
   const firstScript = document.getElementsByTagName(tagName)[0];
   const dataLayerParam = gtmVariable === 'dataLayer' ? '' : '&l=' + gtmVariable;
-  const biParam = identifier ? '&bi=' + identifier : '';
+  const biParam = identifier ? '&bi=' + encodeURIComponent(identifier) : '';
   const script = document.createElement(tagName) as HTMLScriptElement;
   const path = identifier ? 'ck' + containerId : containerId;
   script.async = true;
