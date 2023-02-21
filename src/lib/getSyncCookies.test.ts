@@ -1,6 +1,9 @@
 import getSyncCookies from './getSyncCookies';
 
 describe('getSyncCookies', () => {
+  beforeEach(() => {
+    navigator.sendBeacon = (() => {}) as any;
+  });
   test('returns a function', () => {
     const result = getSyncCookies('/endpoint');
     expect(typeof result).toBe('function');
@@ -20,7 +23,9 @@ describe('getSyncCookies', () => {
     const sendBeaconSpy = jest.spyOn(navigator, 'sendBeacon');
     const syncCookies = getSyncCookies('/endpoint');
     syncCookies();
-    (document as any).visibilityState = 'hidden';
+    jest
+      .spyOn(document, 'visibilityState', 'get')
+      .mockReturnValueOnce('hidden');
     document.dispatchEvent(new Event('visibilitychange'));
     expect(sendBeaconSpy).toHaveBeenCalledWith('/endpoint');
   });
@@ -29,7 +34,9 @@ describe('getSyncCookies', () => {
     const sendBeaconSpy = jest.spyOn(navigator, 'sendBeacon');
     const syncCookies = getSyncCookies('/endpoint');
     syncCookies();
-    (document as any).visibilityState = 'visible';
+    jest
+      .spyOn(document, 'visibilityState', 'get')
+      .mockReturnValueOnce('visible');
     document.dispatchEvent(new Event('visibilitychange'));
     expect(sendBeaconSpy).not.toHaveBeenCalled();
   });

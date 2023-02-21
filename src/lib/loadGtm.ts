@@ -30,7 +30,7 @@ export default function loadGtm(
   const dataLayerParam = gtmVariable === 'dataLayer' ? '' : '&l=' + gtmVariable;
   const biParam = identifier ? '&bi=' + encodeURIComponent(identifier) : '';
   const script = document.createElement(tagName) as HTMLScriptElement;
-  const path = identifier ? 'ck' + containerId : containerId;
+  const path = identifier ? 'kp' + containerId : containerId;
   script.async = true;
   script.src = domain + '/' + path + '.js?id=' + id + dataLayerParam + biParam;
   firstScript.parentNode?.insertBefore(script, firstScript);

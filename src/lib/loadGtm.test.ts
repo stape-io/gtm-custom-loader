@@ -70,7 +70,7 @@ test('insert script with uid', () => {
     'test'
   );
   expect(document.head.innerHTML).toEqual(
-    '<script src="https://gtm.stape.io/ckswhxltns.js?id=GTM-ID&amp;bi=cookieValue"></script><script src="https://some-script.js"></script>'
+    '<script src="https://gtm.stape.io/kpswhxltns.js?id=GTM-ID&amp;bi=cookieValue"></script><script src="https://some-script.js"></script>'
   );
 });
 
@@ -87,7 +87,7 @@ test('insert script with uid and custom data layer name', () => {
     'test'
   );
   expect(document.head.innerHTML).toEqual(
-    '<script src="https://gtm.stape.io/ckswhxltns.js?id=GTM-ID&amp;l=customDataLayer&amp;bi=cookieValue"></script><script src="https://some-script.js"></script>'
+    '<script src="https://gtm.stape.io/kpswhxltns.js?id=GTM-ID&amp;l=customDataLayer&amp;bi=cookieValue"></script><script src="https://some-script.js"></script>'
   );
 });
 
